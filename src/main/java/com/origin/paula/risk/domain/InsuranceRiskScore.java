@@ -27,41 +27,41 @@ public class InsuranceRiskScore {
 		this.life = baseRiskScore;
 
 		if (riskProfile.isYoungAdult()) {
-			this.deductAutoScore(2);
-			this.deductDisabilityScore(2);
-			this.deductHomeScore(2);
-			this.deductLifeScore(2);
+			this.deductAutoRisk(2);
+			this.deductDisabilityRisk(2);
+			this.deductHomeRisk(2);
+			this.deductLifeRisk(2);
 		} else if (riskProfile.isAdult()) {
-			this.deductAutoScore(1);
-			this.deductDisabilityScore(1);
-			this.deductHomeScore(1);
-			this.deductLifeScore(1);
+			this.deductAutoRisk(1);
+			this.deductDisabilityRisk(1);
+			this.deductHomeRisk(1);
+			this.deductLifeRisk(1);
 		}
 
 		if (riskProfile.hasHighIncome()) {
-			this.deductAutoScore(1);
-			this.deductDisabilityScore(1);
-			this.deductHomeScore(1);
-			this.deductLifeScore(1);
+			this.deductAutoRisk(1);
+			this.deductDisabilityRisk(1);
+			this.deductHomeRisk(1);
+			this.deductLifeRisk(1);
 		}
 
 		if (riskProfile.hasMortgagedHouse()) {
-			this.addHomeScore(1);
-			this.addDisabilityScore(1);
+			this.addHomeRisk(1);
+			this.addDisabilityRisk(1);
 		}
 
 		if (riskProfile.hasDependents()) {
-			this.addLifeScore(1);
-			this.addDisabilityScore(1);
+			this.addLifeRisk(1);
+			this.addDisabilityRisk(1);
 		}
 
 		if (riskProfile.isMarried()) {
-			this.addLifeScore(1);
-			this.deductDisabilityScore(1);
+			this.addLifeRisk(1);
+			this.deductDisabilityRisk(1);
 		}
 
 		if (riskProfile.hasNewVehicle()) {
-			this.addAutoScore(1);
+			this.addAutoRisk(1);
 		}
 	}
 	
@@ -83,11 +83,11 @@ public class InsuranceRiskScore {
 		return mapScore(this.auto);
 	}
 
-	public void addAutoScore(int score) {
+	public void addAutoRisk(int score) {
 		this.auto += score;
 	}
 	
-	public void deductAutoScore(int score) {
+	public void deductAutoRisk(int score) {
 		this.auto -= score;
 	}
 
@@ -95,11 +95,11 @@ public class InsuranceRiskScore {
 		return mapScore(this.disability);
 	}
 
-	public void addDisabilityScore(int score) {
+	public void addDisabilityRisk(int score) {
 		this.disability += score;
 	}
 	
-	public void deductDisabilityScore(int score) {
+	public void deductDisabilityRisk(int score) {
 		this.disability -= score;
 	}
 
@@ -107,11 +107,11 @@ public class InsuranceRiskScore {
 		return mapScore(this.home);
 	}
 
-	public void addHomeScore(int score) {
+	public void addHomeRisk(int score) {
 		this.home += score;
 	}
 	
-	public void deductHomeScore(int score) {
+	public void deductHomeRisk(int score) {
 		this.home -= score;
 	}
 
@@ -119,11 +119,11 @@ public class InsuranceRiskScore {
 		return mapScore(this.life);
 	}
 
-	public void addLifeScore(int score) {
+	public void addLifeRisk(int score) {
 		this.life += score;
 	}
 	
-	public void deductLifeScore(int score) {
+	public void deductLifeRisk(int score) {
 		this.life -= score;
 	}
 	
