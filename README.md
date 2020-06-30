@@ -13,7 +13,9 @@ You need to have Maven configured. You can follow its instructions [here](https:
 ### Compiling and Running
 To compile the API, you can run the following command on the project root:
 `mvn clean install -U`
+
 It should compile the project and download any missing dependencies, generating a .jar file as a result inside the target folder.
+
 Then, you can start the application by running:
 `java -jar target\origin-risk-api-0.0.1-SNAPSHOT.jar`
 It will start the application on localhost port 8080.
