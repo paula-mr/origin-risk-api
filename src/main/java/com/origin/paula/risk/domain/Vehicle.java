@@ -1,5 +1,7 @@
 package com.origin.paula.risk.domain;
 
+import java.util.Calendar;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -19,6 +21,11 @@ public class Vehicle {
 	public Vehicle(Integer fabricationYear) {
 		super();
 		this.fabricationYear = fabricationYear;
+	}
+	
+	public boolean isNew() {
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);	
+		return (currentYear - fabricationYear) <= YEARS_CONSIDERED_NEW;
 	}
 
 	public Integer getFabricationYear() {

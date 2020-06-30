@@ -6,8 +6,13 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.origin.paula.risk.enums.MaritalStatus;
 
-public class RiskProfile {	
+public class RiskProfile {
+	public static final int HIGH_INCOME = 200000;
+	public static final int MAX_AGE_YOUNG_ADULT = 30;
+	public static final int MAX_AGE_ADULT = 40;
+
 	@NotNull(message = "Age is required.")
 	@Min(value = 0, message = "Age can not be negative.")
 	@JsonProperty("age")
@@ -29,7 +34,7 @@ public class RiskProfile {
 	@NotNull(message = "Marital status is required.")
 	@JsonProperty("marital_status")
 	private String maritalStatus;
-	
+
 	@NotNull(message = "Risk answers are required.")
 	@JsonProperty("risk_questions")
 	private List<Boolean> riskQuestions;
@@ -37,7 +42,8 @@ public class RiskProfile {
 	@JsonProperty("vehicle")
 	private Vehicle vehicleOwned;
 
-	public RiskProfile() {}
+	public RiskProfile() {
+	}
 
 	public RiskProfile(Integer age, Integer quantityDependents, House houseOwned, Integer income, String maritalStatus,
 			List<Boolean> riskQuestions, Vehicle vehicleOwned) {
@@ -49,6 +55,34 @@ public class RiskProfile {
 		this.maritalStatus = maritalStatus;
 		this.riskQuestions = riskQuestions;
 		this.vehicleOwned = vehicleOwned;
+	}
+
+	public boolean isYoungAdult() {
+		return this.age < MAX_AGE_YOUNG_ADULT;
+	}
+
+	public boolean isAdult() {
+		return this.age < MAX_AGE_ADULT;
+	}
+
+	public boolean hasHighIncome() {
+		return this.income > HIGH_INCOME;
+	}
+
+	public boolean hasMortgagedHouse() {
+		return this.houseOwned != null && this.houseOwned.isMortgaged();
+	}
+
+	public boolean hasNewVehicle() {
+		return this.vehicleOwned != null && this.vehicleOwned.isNew();
+	}
+
+	public boolean hasDependents() {
+		return this.quantityDependents > 0;
+	}
+
+	public boolean isMarried() {
+		return MaritalStatus.MARRIED.getValue().equals(this.maritalStatus);
 	}
 
 	public Integer getAge() {
