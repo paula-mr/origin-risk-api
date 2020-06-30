@@ -4,9 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.origin.paula.risk.domain.RiskProfile;
 import com.origin.paula.risk.services.RiskService;
 
 @RestController
@@ -22,7 +24,7 @@ public class RiskController {
 	}
 
 	@PostMapping(value = "/calculate")
-	public ResponseEntity<Object> calculate() {
-		return ResponseEntity.ok(riskService.calculate(null));
+	public ResponseEntity<Object> calculate(@RequestBody RiskProfile riskProfile) {
+		return ResponseEntity.ok(riskService.calculate(riskProfile));
 	}
 }
