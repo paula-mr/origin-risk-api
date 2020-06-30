@@ -5,6 +5,7 @@ import java.util.Calendar;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Vehicle {
@@ -23,6 +24,7 @@ public class Vehicle {
 		this.fabricationYear = fabricationYear;
 	}
 	
+	@JsonIgnore
 	public boolean isNew() {
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);	
 		return (currentYear - fabricationYear) <= YEARS_CONSIDERED_NEW;

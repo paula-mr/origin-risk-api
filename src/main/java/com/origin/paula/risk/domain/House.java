@@ -2,6 +2,7 @@ package com.origin.paula.risk.domain;
 
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.origin.paula.risk.enums.OwnershipStatus;
 
@@ -17,7 +18,8 @@ public class House {
 		super();
 		this.ownershipStatus = ownershipStatus;
 	}
-
+	
+	@JsonIgnore
 	public boolean isMortgaged() {
 		return OwnershipStatus.MORTGAGED.getValue().equals(this.ownershipStatus);
 	}

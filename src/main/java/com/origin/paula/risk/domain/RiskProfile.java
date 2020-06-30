@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.origin.paula.risk.enums.MaritalStatus;
 
@@ -56,31 +57,38 @@ public class RiskProfile {
 		this.riskQuestions = riskQuestions;
 		this.vehicleOwned = vehicleOwned;
 	}
-
+	
+	@JsonIgnore
 	public boolean isYoungAdult() {
 		return this.age < MAX_AGE_YOUNG_ADULT;
 	}
 
+	@JsonIgnore
 	public boolean isAdult() {
 		return this.age < MAX_AGE_ADULT;
 	}
 
+	@JsonIgnore
 	public boolean hasHighIncome() {
 		return this.income > HIGH_INCOME;
 	}
 
+	@JsonIgnore
 	public boolean hasMortgagedHouse() {
 		return this.houseOwned != null && this.houseOwned.isMortgaged();
 	}
 
+	@JsonIgnore
 	public boolean hasNewVehicle() {
 		return this.vehicleOwned != null && this.vehicleOwned.isNew();
 	}
 
+	@JsonIgnore
 	public boolean hasDependents() {
 		return this.quantityDependents > 0;
 	}
 
+	@JsonIgnore
 	public boolean isMarried() {
 		return MaritalStatus.MARRIED.getValue().equals(this.maritalStatus);
 	}
