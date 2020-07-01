@@ -55,7 +55,7 @@ public class InsurancePlanCalculator {
 	}
 	
 	private void applyHouseOwnershipRule(RiskProfile riskProfile) {
-		if (riskProfile.hasMortgagedHouse()) {
+		if (riskProfile.ownsMortgagedHouse()) {
 			this.addHomeRisk(1);
 			this.addDisabilityRisk(1);
 		}		
@@ -76,7 +76,7 @@ public class InsurancePlanCalculator {
 	}
 	
 	private void applyVehicleOwnershipRule(RiskProfile riskProfile) {
-		if (riskProfile.hasNewVehicle()) {
+		if (riskProfile.ownsNewVehicle()) {
 			this.addAutoRisk(1);
 		}
 	}

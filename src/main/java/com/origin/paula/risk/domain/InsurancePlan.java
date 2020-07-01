@@ -27,16 +27,16 @@ public class InsurancePlan {
 	}
 	
 	public void checkForInegibility(RiskProfile riskProfile) {
-		if (riskProfile.getIncome() == 0)
+		if (!riskProfile.hasIncome())
 			this.setDisability(InsuranceType.INELEGIBLE.getValue());
 
-		if (riskProfile.getHouseOwned() == null)
+		if (!riskProfile.ownsHouse())
 			this.setHome(InsuranceType.INELEGIBLE.getValue());
 
-		if (riskProfile.getVehicleOwned() == null)
+		if (!riskProfile.ownsVehicle())
 			this.setAuto(InsuranceType.INELEGIBLE.getValue());
 
-		if (riskProfile.getAge() > 60) {
+		if (riskProfile.isElderly()) {
 			this.setDisability(InsuranceType.INELEGIBLE.getValue());
 			this.setLife(InsuranceType.INELEGIBLE.getValue());
 		}

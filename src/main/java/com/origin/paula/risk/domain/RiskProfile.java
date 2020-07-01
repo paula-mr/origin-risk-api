@@ -10,9 +10,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.origin.paula.risk.enums.MaritalStatus;
 
 public class RiskProfile {
-	public static final int HIGH_INCOME = 200000;
-	public static final int MAX_AGE_YOUNG_ADULT = 30;
-	public static final int MAX_AGE_ADULT = 40;
+	public static final int MIN_HIGH_INCOME = 200001;
+	public static final int MAX_AGE_YOUNG_ADULT = 29;
+	public static final int MAX_AGE_ADULT = 39;
+	public static final int MIN_AGE_ELDERLY = 61;
 
 	@NotNull(message = "Age is required.")
 	@Min(value = 0, message = "Age can not be negative.")
@@ -57,29 +58,49 @@ public class RiskProfile {
 		this.riskQuestions = riskQuestions;
 		this.vehicleOwned = vehicleOwned;
 	}
-	
+
+	@JsonIgnore
+	public boolean isElderly() {
+		return this.age >= MIN_AGE_ELDERLY;
+	}
+
 	@JsonIgnore
 	public boolean isYoungAdult() {
-		return this.age < MAX_AGE_YOUNG_ADULT;
+		return this.age <= MAX_AGE_YOUNG_ADULT;
 	}
 
 	@JsonIgnore
 	public boolean isAdult() {
-		return this.age < MAX_AGE_ADULT;
+		return this.age <= MAX_AGE_ADULT;
+	}
+	
+	@JsonIgnore
+	public boolean hasIncome() {
+		return this.income > 0;
 	}
 
 	@JsonIgnore
 	public boolean hasHighIncome() {
-		return this.income > HIGH_INCOME;
+		return this.income >= MIN_HIGH_INCOME;
+	}
+	
+	@JsonIgnore
+	public boolean ownsHouse() {
+		return this.houseOwned != null;
 	}
 
 	@JsonIgnore
-	public boolean hasMortgagedHouse() {
+	public boolean ownsMortgagedHouse() {
 		return this.houseOwned != null && this.houseOwned.isMortgaged();
 	}
+	
+	@JsonIgnore
+	public boolean ownsVehicle() {
+		return this.vehicleOwned != null;
+	}
 
 	@JsonIgnore
-	public boolean hasNewVehicle() {
+	public boolean ownsNewVehicle() {
 		return this.vehicleOwned != null && this.vehicleOwned.isNew();
 	}
 

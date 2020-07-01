@@ -102,8 +102,8 @@ public class RiskServiceTest {
 	}
 
 	@Test
-	public void overSixtyYearsOld() throws InvalidAttributesException {
-		InsurancePlan result = riskService.calculate(validRiskProfileOverSixty());
+	public void elderly() throws InvalidAttributesException {
+		InsurancePlan result = riskService.calculate(validRiskProfileElderly());
 		assertEquals(InsuranceType.INELEGIBLE.getValue(), result.getLife());
 		assertEquals(InsuranceType.INELEGIBLE.getValue(), result.getDisability());
 		assertEquals(InsuranceType.ECONOMIC.getValue(), result.getAuto());
@@ -120,8 +120,8 @@ public class RiskServiceTest {
 	}
 
 	@Test
-	public void underThirty() throws InvalidAttributesException {
-		InsurancePlan result = riskService.calculate(validRiskProfileUnderThirty());
+	public void youngAdult() throws InvalidAttributesException {
+		InsurancePlan result = riskService.calculate(validRiskProfileYoungAdult());
 		assertEquals(InsuranceType.ECONOMIC.getValue(), result.getLife());
 		assertEquals(InsuranceType.ECONOMIC.getValue(), result.getDisability());
 		assertEquals(InsuranceType.ECONOMIC.getValue(), result.getHome());
@@ -129,8 +129,8 @@ public class RiskServiceTest {
 	}
 
 	@Test
-	public void underForty() throws InvalidAttributesException {
-		InsurancePlan result = riskService.calculate(validRiskProfileUnderForty());
+	public void adult() throws InvalidAttributesException {
+		InsurancePlan result = riskService.calculate(validRiskProfileAdult());
 		assertEquals(InsuranceType.REGULAR.getValue(), result.getLife());
 		assertEquals(InsuranceType.REGULAR.getValue(), result.getDisability());
 		assertEquals(InsuranceType.REGULAR.getValue(), result.getHome());
@@ -138,8 +138,8 @@ public class RiskServiceTest {
 	}
 
 	@Test
-	public void incomeOverTwoHundredThousand() throws InvalidAttributesException {
-		InsurancePlan result = riskService.calculate(validRiskProfileIncomeAboveTwoHundredThousand());
+	public void highIncome() throws InvalidAttributesException {
+		InsurancePlan result = riskService.calculate(validRiskProfileHighIncome());
 		assertEquals(InsuranceType.REGULAR.getValue(), result.getLife());
 		assertEquals(InsuranceType.REGULAR.getValue(), result.getDisability());
 		assertEquals(InsuranceType.REGULAR.getValue(), result.getHome());
@@ -352,14 +352,14 @@ public class RiskServiceTest {
 		return riskProfile;
 	}
 
-	private RiskProfile validRiskProfileOverSixty() {
+	private RiskProfile validRiskProfileElderly() {
 		List<Boolean> riskQuestions = new ArrayList<>();
 		riskQuestions.add(false);
 		riskQuestions.add(false);
 		riskQuestions.add(false);
 
 		RiskProfile riskProfile = new RiskProfile();
-		riskProfile.setAge(61);
+		riskProfile.setAge(RiskProfile.MIN_AGE_ELDERLY);
 		riskProfile.setIncome(70000);
 		riskProfile.setQuantityDependents(0);
 		riskProfile.setHouseOwned(new House(OwnershipStatus.OWNED.getValue()));
@@ -386,14 +386,14 @@ public class RiskServiceTest {
 		return riskProfile;
 	}
 
-	private RiskProfile validRiskProfileUnderThirty() {
+	private RiskProfile validRiskProfileYoungAdult() {
 		List<Boolean> riskQuestions = new ArrayList<>();
 		riskQuestions.add(true);
 		riskQuestions.add(true);
 		riskQuestions.add(false);
 
 		RiskProfile riskProfile = new RiskProfile();
-		riskProfile.setAge(25);
+		riskProfile.setAge(RiskProfile.MAX_AGE_YOUNG_ADULT);
 		riskProfile.setIncome(70000);
 		riskProfile.setQuantityDependents(0);
 		riskProfile.setHouseOwned(new House(OwnershipStatus.OWNED.getValue()));
@@ -403,14 +403,14 @@ public class RiskServiceTest {
 		return riskProfile;
 	}
 
-	private RiskProfile validRiskProfileUnderForty() {
+	private RiskProfile validRiskProfileAdult() {
 		List<Boolean> riskQuestions = new ArrayList<>();
 		riskQuestions.add(true);
 		riskQuestions.add(true);
 		riskQuestions.add(true);
 
 		RiskProfile riskProfile = new RiskProfile();
-		riskProfile.setAge(31);
+		riskProfile.setAge(RiskProfile.MAX_AGE_ADULT);
 		riskProfile.setIncome(70000);
 		riskProfile.setQuantityDependents(0);
 		riskProfile.setHouseOwned(new House(OwnershipStatus.OWNED.getValue()));
@@ -420,7 +420,7 @@ public class RiskServiceTest {
 		return riskProfile;
 	}
 
-	private RiskProfile validRiskProfileIncomeAboveTwoHundredThousand() {
+	private RiskProfile validRiskProfileHighIncome() {
 		List<Boolean> riskQuestions = new ArrayList<>();
 		riskQuestions.add(true);
 		riskQuestions.add(true);
@@ -428,7 +428,7 @@ public class RiskServiceTest {
 
 		RiskProfile riskProfile = new RiskProfile();
 		riskProfile.setAge(45);
-		riskProfile.setIncome(210000);
+		riskProfile.setIncome(RiskProfile.MIN_HIGH_INCOME);
 		riskProfile.setQuantityDependents(0);
 		riskProfile.setHouseOwned(new House(OwnershipStatus.OWNED.getValue()));
 		riskProfile.setMaritalStatus(MaritalStatus.SINGLE.getValue());
