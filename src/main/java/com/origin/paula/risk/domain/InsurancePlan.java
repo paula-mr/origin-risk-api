@@ -31,7 +31,7 @@ public class InsurancePlan {
 		riskScore.calculate(riskProfile);
 		
 		checkForInegibility(riskProfile);
-		updatePlans(riskScore);
+		updatePlan(riskScore);
 	}
 	
 	private void checkForInegibility(RiskProfile riskProfile) {
@@ -50,7 +50,7 @@ public class InsurancePlan {
 		}
 	}
 
-	private void updatePlans(RiskScore riskScore) {
+	private void updatePlan(RiskScore riskScore) {
 		if (!InsuranceType.INELEGIBLE.getValue().equals(this.getAuto()))
 			this.setAuto(mapScore(riskScore.getAutoRisk()));
 
