@@ -1,6 +1,6 @@
 # origin-risk-api
 
-This is a demo API constructed in Java utilizing the Spring Boot framework and Maven as the project management tool. It suggests an insurance plan based on their risk profile.
+This is a demo API constructed in Java using Spring Boot framework and Maven as the project management tool. It suggests an insurance plan based on their risk profile.
 
 ## How to run
 
