@@ -34,7 +34,7 @@ public class RiskService {
 		validateRiskProfile(riskProfile);
 		
 		InsurancePlan insurancePlan = new InsurancePlan();
-		insurancePlan.calculate(riskProfile);
+		insurancePlan.create(riskProfile);
 		
 		return insurancePlan;
 	}

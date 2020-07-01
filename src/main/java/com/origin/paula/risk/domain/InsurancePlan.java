@@ -18,7 +18,7 @@ public class InsurancePlan {
 
 	public InsurancePlan() {}
 
-	public void calculate(RiskProfile riskProfile) {
+	public void create(RiskProfile riskProfile) {
 		RiskScore riskScore = new RiskScore();
 		riskScore.calculate(riskProfile);
 		
