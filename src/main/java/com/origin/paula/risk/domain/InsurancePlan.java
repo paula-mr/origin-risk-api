@@ -17,14 +17,6 @@ public class InsurancePlan {
 	private String life;
 
 	public InsurancePlan() {}
-	
-	public InsurancePlan(String auto, String disability, String home, String life) {
-		super();
-		this.auto = auto;
-		this.disability = disability;
-		this.home = home;
-		this.life = life;
-	}
 
 	public void calculate(RiskProfile riskProfile) {
 		RiskScore riskScore = new RiskScore();
