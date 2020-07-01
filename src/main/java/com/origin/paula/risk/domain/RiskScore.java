@@ -3,9 +3,7 @@ package com.origin.paula.risk.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.origin.paula.risk.enums.InsuranceType;
-
-public class InsurancePlanCalculator {
+public class RiskScore {
 	private int autoRisk;
 	private int disabilityRisk;
 	private int homeRisk;
@@ -81,18 +79,8 @@ public class InsurancePlanCalculator {
 		}
 	}
 
-	private String mapScore(int score) {
-		if (score < 1)
-			return InsuranceType.ECONOMIC.getValue();
-
-		if (score < 3)
-			return InsuranceType.REGULAR.getValue();
-
-		return InsuranceType.RESPONSIBLE.getValue();
-	}
-
-	public String getAuto() {
-		return mapScore(this.autoRisk);
+	public int getAutoRisk() {
+		return this.autoRisk;
 	}
 
 	public void addAutoRisk(int score) {
@@ -103,8 +91,8 @@ public class InsurancePlanCalculator {
 		this.autoRisk -= score;
 	}
 
-	public String getDisability() {
-		return mapScore(this.disabilityRisk);
+	public int getDisabilityRisk() {
+		return this.disabilityRisk;
 	}
 
 	public void addDisabilityRisk(int score) {
@@ -115,8 +103,8 @@ public class InsurancePlanCalculator {
 		this.disabilityRisk -= score;
 	}
 
-	public String getHome() {
-		return mapScore(this.homeRisk);
+	public int getHomeRisk() {
+		return this.homeRisk;
 	}
 
 	public void addHomeRisk(int score) {
@@ -127,8 +115,8 @@ public class InsurancePlanCalculator {
 		this.homeRisk -= score;
 	}
 
-	public String getLife() {
-		return mapScore(this.lifeRisk);
+	public int getLifeRisk() {
+		return this.lifeRisk;
 	}
 
 	public void addLifeRisk(int score) {
