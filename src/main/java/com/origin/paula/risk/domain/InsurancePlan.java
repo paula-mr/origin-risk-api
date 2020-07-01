@@ -42,7 +42,7 @@ public class InsurancePlan {
 		}
 	}
 
-	public void updatePlans(InsuranceRiskScore riskScore) {
+	public void updatePlans(InsurancePlanCalculator riskScore) {
 		if (!InsuranceType.INELEGIBLE.getValue().equals(this.getAuto()))
 			this.setAuto(riskScore.getAuto());
 

@@ -16,7 +16,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.origin.paula.risk.domain.House;
 import com.origin.paula.risk.domain.InsurancePlan;
-import com.origin.paula.risk.domain.InsuranceRiskScore;
+import com.origin.paula.risk.domain.InsurancePlanCalculator;
 import com.origin.paula.risk.domain.RiskProfile;
 import com.origin.paula.risk.domain.Vehicle;
 import com.origin.paula.risk.enums.MaritalStatus;
@@ -34,7 +34,7 @@ public class RiskService {
 	public InsurancePlan calculate(RiskProfile riskProfile) throws InvalidAttributesException {
 		validateRiskProfile(riskProfile);
 		
-		InsuranceRiskScore riskScore = new InsuranceRiskScore();
+		InsurancePlanCalculator riskScore = new InsurancePlanCalculator();
 		InsurancePlan insurancePlan = new InsurancePlan();
 
 		insurancePlan.checkForInegibility(riskProfile);

@@ -5,27 +5,33 @@ import java.util.stream.Collectors;
 
 import com.origin.paula.risk.enums.InsuranceType;
 
-public class InsuranceRiskScore {
-	private int auto;
-	private int disability;
-	private int home;
-	private int life;
-	
-	public InsuranceRiskScore() {
-		this.auto = 0;
-		this.disability = 0;
-		this.home = 0;
-		this.life = 0;
-	}
+public class InsurancePlanCalculator {
+	private int autoRisk;
+	private int disabilityRisk;
+	private int homeRisk;
+	private int lifeRisk;
 	
 	public void calculate(RiskProfile riskProfile) {
-		int baseRiskScore = calculateBaseRiskPoints(riskProfile.getRiskQuestions());
-		
-		this.auto = baseRiskScore;
-		this.disability = baseRiskScore;
-		this.home = baseRiskScore;
-		this.life = baseRiskScore;
+		applyBaseRiskScoreRule(riskProfile.getRiskQuestions());
 
+		applyAgeRule(riskProfile);
+		applyIncomeRule(riskProfile);
+		applyHouseOwnershipRule(riskProfile);
+		applyDependentsRule(riskProfile);
+		applyMaritalStatusRule(riskProfile);
+		applyVehicleOwnershipRule(riskProfile);
+	}
+
+	private void applyBaseRiskScoreRule(List<Boolean> riskQuestions) {
+		int baseRiskScore = riskQuestions.stream().filter(q -> q).collect(Collectors.toList()).size();
+		
+		this.autoRisk = baseRiskScore;
+		this.disabilityRisk = baseRiskScore;
+		this.homeRisk = baseRiskScore;
+		this.lifeRisk = baseRiskScore;
+	}
+	
+	private void applyAgeRule(RiskProfile riskProfile) {
 		if (riskProfile.isYoungAdult()) {
 			this.deductAutoRisk(2);
 			this.deductDisabilityRisk(2);
@@ -37,38 +43,44 @@ public class InsuranceRiskScore {
 			this.deductHomeRisk(1);
 			this.deductLifeRisk(1);
 		}
-
+	}
+	
+	private void applyIncomeRule(RiskProfile riskProfile) {
 		if (riskProfile.hasHighIncome()) {
 			this.deductAutoRisk(1);
 			this.deductDisabilityRisk(1);
 			this.deductHomeRisk(1);
 			this.deductLifeRisk(1);
 		}
-
+	}
+	
+	private void applyHouseOwnershipRule(RiskProfile riskProfile) {
 		if (riskProfile.hasMortgagedHouse()) {
 			this.addHomeRisk(1);
 			this.addDisabilityRisk(1);
-		}
-
+		}		
+	}
+	
+	private void applyDependentsRule(RiskProfile riskProfile) {
 		if (riskProfile.hasDependents()) {
 			this.addLifeRisk(1);
 			this.addDisabilityRisk(1);
 		}
-
+	}
+	
+	private void applyMaritalStatusRule(RiskProfile riskProfile) {
 		if (riskProfile.isMarried()) {
 			this.addLifeRisk(1);
 			this.deductDisabilityRisk(1);
 		}
-
+	}
+	
+	private void applyVehicleOwnershipRule(RiskProfile riskProfile) {
 		if (riskProfile.hasNewVehicle()) {
 			this.addAutoRisk(1);
 		}
 	}
-	
-	private int calculateBaseRiskPoints(List<Boolean> riskQuestions) {
-		return riskQuestions.stream().filter(q -> q).collect(Collectors.toList()).size();
-	}
-	
+
 	private String mapScore(int score) {
 		if (score < 1)
 			return InsuranceType.ECONOMIC.getValue();
@@ -80,51 +92,51 @@ public class InsuranceRiskScore {
 	}
 
 	public String getAuto() {
-		return mapScore(this.auto);
+		return mapScore(this.autoRisk);
 	}
 
 	public void addAutoRisk(int score) {
-		this.auto += score;
+		this.autoRisk += score;
 	}
 	
 	public void deductAutoRisk(int score) {
-		this.auto -= score;
+		this.autoRisk -= score;
 	}
 
 	public String getDisability() {
-		return mapScore(this.disability);
+		return mapScore(this.disabilityRisk);
 	}
 
 	public void addDisabilityRisk(int score) {
-		this.disability += score;
+		this.disabilityRisk += score;
 	}
 	
 	public void deductDisabilityRisk(int score) {
-		this.disability -= score;
+		this.disabilityRisk -= score;
 	}
 
 	public String getHome() {
-		return mapScore(this.home);
+		return mapScore(this.homeRisk);
 	}
 
 	public void addHomeRisk(int score) {
-		this.home += score;
+		this.homeRisk += score;
 	}
 	
 	public void deductHomeRisk(int score) {
-		this.home -= score;
+		this.homeRisk -= score;
 	}
 
 	public String getLife() {
-		return mapScore(this.life);
+		return mapScore(this.lifeRisk);
 	}
 
 	public void addLifeRisk(int score) {
-		this.life += score;
+		this.lifeRisk += score;
 	}
 	
 	public void deductLifeRisk(int score) {
-		this.life -= score;
+		this.lifeRisk -= score;
 	}
 	
 }
