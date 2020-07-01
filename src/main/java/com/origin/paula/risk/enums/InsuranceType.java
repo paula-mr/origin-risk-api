@@ -1,7 +1,7 @@
 package com.origin.paula.risk.enums;
 
 public enum InsuranceType {
-	INELEGIBLE("inelegible"),
+	INELIGIBLE("ineligible"),
 	ECONOMIC("economic"),
 	REGULAR("regular"),
 	RESPONSIBLE("responsible");

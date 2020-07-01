@@ -77,7 +77,7 @@ public class RiskServiceTest {
 	@Test
 	public void noIncome() throws InvalidAttributesException {
 		InsurancePlan result = riskService.calculate(validRiskProfileNoIncome());
-		assertEquals(InsuranceType.INELEGIBLE.getValue(), result.getDisability());
+		assertEquals(InsuranceType.INELIGIBLE.getValue(), result.getDisability());
 		assertEquals(InsuranceType.ECONOMIC.getValue(), result.getHome());
 		assertEquals(InsuranceType.ECONOMIC.getValue(), result.getLife());
 		assertEquals(InsuranceType.ECONOMIC.getValue(), result.getAuto());
@@ -86,7 +86,7 @@ public class RiskServiceTest {
 	@Test
 	public void noVehicle() throws InvalidAttributesException {
 		InsurancePlan result = riskService.calculate(validRiskProfileNoVehicle());
-		assertEquals(InsuranceType.INELEGIBLE.getValue(), result.getAuto());
+		assertEquals(InsuranceType.INELIGIBLE.getValue(), result.getAuto());
 		assertEquals(InsuranceType.ECONOMIC.getValue(), result.getHome());
 		assertEquals(InsuranceType.ECONOMIC.getValue(), result.getLife());
 		assertEquals(InsuranceType.ECONOMIC.getValue(), result.getDisability());
@@ -95,7 +95,7 @@ public class RiskServiceTest {
 	@Test
 	public void noHouse() throws InvalidAttributesException {
 		InsurancePlan result = riskService.calculate(validRiskProfileNoHouse());
-		assertEquals(InsuranceType.INELEGIBLE.getValue(), result.getHome());
+		assertEquals(InsuranceType.INELIGIBLE.getValue(), result.getHome());
 		assertEquals(InsuranceType.ECONOMIC.getValue(), result.getDisability());
 		assertEquals(InsuranceType.ECONOMIC.getValue(), result.getLife());
 		assertEquals(InsuranceType.ECONOMIC.getValue(), result.getAuto());
@@ -104,8 +104,8 @@ public class RiskServiceTest {
 	@Test
 	public void elderly() throws InvalidAttributesException {
 		InsurancePlan result = riskService.calculate(validRiskProfileElderly());
-		assertEquals(InsuranceType.INELEGIBLE.getValue(), result.getLife());
-		assertEquals(InsuranceType.INELEGIBLE.getValue(), result.getDisability());
+		assertEquals(InsuranceType.INELIGIBLE.getValue(), result.getLife());
+		assertEquals(InsuranceType.INELIGIBLE.getValue(), result.getDisability());
 		assertEquals(InsuranceType.ECONOMIC.getValue(), result.getAuto());
 		assertEquals(InsuranceType.ECONOMIC.getValue(), result.getHome());
 	}

@@ -30,37 +30,37 @@ public class InsurancePlan {
 		RiskScore riskScore = new RiskScore();
 		riskScore.calculate(riskProfile);
 		
-		checkForInegibility(riskProfile);
+		checkForIneligibility(riskProfile);
 		updatePlan(riskScore);
 	}
 	
-	private void checkForInegibility(RiskProfile riskProfile) {
+	private void checkForIneligibility(RiskProfile riskProfile) {
 		if (!riskProfile.hasIncome())
-			this.setDisability(InsuranceType.INELEGIBLE.getValue());
+			this.setDisability(InsuranceType.INELIGIBLE.getValue());
 
 		if (!riskProfile.ownsHouse())
-			this.setHome(InsuranceType.INELEGIBLE.getValue());
+			this.setHome(InsuranceType.INELIGIBLE.getValue());
 
 		if (!riskProfile.ownsVehicle())
-			this.setAuto(InsuranceType.INELEGIBLE.getValue());
+			this.setAuto(InsuranceType.INELIGIBLE.getValue());
 
 		if (riskProfile.isElderly()) {
-			this.setDisability(InsuranceType.INELEGIBLE.getValue());
-			this.setLife(InsuranceType.INELEGIBLE.getValue());
+			this.setDisability(InsuranceType.INELIGIBLE.getValue());
+			this.setLife(InsuranceType.INELIGIBLE.getValue());
 		}
 	}
 
 	private void updatePlan(RiskScore riskScore) {
-		if (!InsuranceType.INELEGIBLE.getValue().equals(this.getAuto()))
+		if (!InsuranceType.INELIGIBLE.getValue().equals(this.getAuto()))
 			this.setAuto(mapScore(riskScore.getAutoRisk()));
 
-		if (!InsuranceType.INELEGIBLE.getValue().equals(this.getHome()))
+		if (!InsuranceType.INELIGIBLE.getValue().equals(this.getHome()))
 			this.setHome(mapScore(riskScore.getHomeRisk()));
 
-		if (!InsuranceType.INELEGIBLE.getValue().equals(this.getDisability()))
+		if (!InsuranceType.INELIGIBLE.getValue().equals(this.getDisability()))
 			this.setDisability(mapScore(riskScore.getDisabilityRisk()));
 
-		if (!InsuranceType.INELEGIBLE.getValue().equals(this.getLife()))
+		if (!InsuranceType.INELIGIBLE.getValue().equals(this.getLife()))
 			this.setLife(mapScore(riskScore.getLifeRisk()));
 	}
 	
