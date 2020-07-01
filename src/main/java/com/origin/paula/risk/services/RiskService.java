@@ -48,7 +48,7 @@ public class RiskService {
 
 		if (!CollectionUtils.isEmpty(violations)) {
 			violations.forEach(v -> log.error(v.getMessage()));
-			throw new InvalidAttributesException("User fields are invalid.");
+			throw new InvalidAttributesException("User fields are not valid.");
 		}
 
 		validateHouse(riskProfile.getHouseOwned());
@@ -66,7 +66,7 @@ public class RiskService {
 
 		if (!CollectionUtils.isEmpty(violations)) {
 			violations.forEach(v -> log.error(v.getMessage()));
-			throw new InvalidAttributesException("Vehicle fields are invalid.");
+			throw new InvalidAttributesException("Vehicle fields are not valid.");
 		}
 
 	}
@@ -79,7 +79,7 @@ public class RiskService {
 
 	private void validateMaritalStatus(String maritalStatus) throws InvalidAttributesException {
 		if (!MaritalStatus.isValid(maritalStatus))
-			throw new InvalidAttributesException("Marital status is invalid.");
+			throw new InvalidAttributesException("Marital status is not valid.");
 
 	}
 
@@ -92,11 +92,11 @@ public class RiskService {
 
 		if (!CollectionUtils.isEmpty(violations)) {
 			violations.forEach(v -> log.error(v.getMessage()));
-			throw new InvalidAttributesException("Home fields are invalid.");
+			throw new InvalidAttributesException("Home fields are not valid.");
 		}
 
 		if (!OwnershipStatus.isValid(house.getOwnershipStatus()))
-			throw new InvalidAttributesException("Ownership status is invalid.");
+			throw new InvalidAttributesException("Ownership status is not valid.");
 
 	}
 
